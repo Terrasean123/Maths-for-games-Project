@@ -6,3 +6,11 @@ C:\Users\s214921\OneDrive - The Academy of Interactive Entertainment Ltd\Documen
 C:\Users\s214921\OneDrive - The Academy of Interactive Entertainment Ltd\Documents\MathsClasses\MathsClasses\obj\Debug\MathsClasses.csproj.CoreCompileInputs.cache
 C:\Users\s214921\OneDrive - The Academy of Interactive Entertainment Ltd\Documents\MathsClasses\MathsClasses\obj\Debug\MathsClasses.exe
 C:\Users\s214921\OneDrive - The Academy of Interactive Entertainment Ltd\Documents\MathsClasses\MathsClasses\obj\Debug\MathsClasses.pdb
+C:\Users\s214921\OneDrive - The Academy of Interactive Entertainment Ltd\Documents\Maths for games project\Maths-for-games-Project\MathsClasses\MathsClasses\bin\Debug\MathsClasses.exe.config
+C:\Users\s214921\OneDrive - The Academy of Interactive Entertainment Ltd\Documents\Maths for games project\Maths-for-games-Project\MathsClasses\MathsClasses\bin\Debug\MathsClasses.exe
+C:\Users\s214921\OneDrive - The Academy of Interactive Entertainment Ltd\Documents\Maths for games project\Maths-for-games-Project\MathsClasses\MathsClasses\bin\Debug\MathsClasses.pdb
+C:\Users\s214921\OneDrive - The Academy of Interactive Entertainment Ltd\Documents\Maths for games project\Maths-for-games-Project\MathsClasses\MathsClasses\obj\Debug\MathsClasses.csproj.AssemblyReference.cache
+C:\Users\s214921\OneDrive - The Academy of Interactive Entertainment Ltd\Documents\Maths for games project\Maths-for-games-Project\MathsClasses\MathsClasses\obj\Debug\MathsClasses.csproj.SuggestedBindingRedirects.cache
+C:\Users\s214921\OneDrive - The Academy of Interactive Entertainment Ltd\Documents\Maths for games project\Maths-for-games-Project\MathsClasses\MathsClasses\obj\Debug\MathsClasses.csproj.CoreCompileInputs.cache
+C:\Users\s214921\OneDrive - The Academy of Interactive Entertainment Ltd\Documents\Maths for games project\Maths-for-games-Project\MathsClasses\MathsClasses\obj\Debug\MathsClasses.exe
+C:\Users\s214921\OneDrive - The Academy of Interactive Entertainment Ltd\Documents\Maths for games project\Maths-for-games-Project\MathsClasses\MathsClasses\obj\Debug\MathsClasses.pdb

@@ -4,14 +4,13 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{CA0A4B81-8E11-4A72-8D8B-D54306DBA7DD}</ProjectGuid>
+    <ProjectGuid>{93BC4FF5-4A18-468D-A676-F62F770A6937}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>MathsClasses</RootNamespace>
-    <AssemblyName>MathsClasses</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <RootNamespace>MathClasses</RootNamespace>
+    <AssemblyName>MathClasses</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -44,9 +43,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Colour.cs" />
+    <Compile Include="Matrix3.cs" />
+    <Compile Include="Matrix4.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UnitTest.cs" />
+    <Compile Include="Vector3.cs" />
+    <Compile Include="Vector4.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
