@@ -20,27 +20,48 @@ namespace MathClasses
 
         public static Vector3 operator +(Vector3 l, Vector3 r)
         {
-            return new Vector3();
+
+            l.y += r.y;
+            l.x += r.x;
+            l.z += r.z;
+
+            return l;
         }
 
         public static Vector3 operator *(Vector3 l, float r)
         {
 
-            return new Vector3();
+            l.x *= r;
+            l.y *= r;
+            l.z *= r;
+            return l;
 
         }
 
         public static Vector3 operator *(float l, Vector3 r)
         {
+            r.x *= l;
+            r.y *= l;
+            r.z *= l;
+            return r;
 
-            return new Vector3();
+        }
 
+        public static Vector3 operator /(Vector3  l , float  r) 
+        {
+            l.y /= r;
+            l.x /= r;
+            l.z /= r;
+
+            return l;
         }
 
         public static Vector3 operator -(Vector3 l, Vector3 r)
         {
-
-            return new Vector3();
+            l.y -= r.y;
+            l.x -= r.x;
+            l.z -= r.z;
+            return l;
         }
 
 
@@ -64,9 +85,15 @@ namespace MathClasses
             return (float)Math.Sqrt(x * x + y * y + z * z);
         }
 
+        public float MagnitudeSqr()
+        {
+            return (x * x + y * y + z * z );
+        }
+
+
         public void Normalize()
         {
-            this *= this.Magnitude();
+            this /= this.Magnitude();
         }
 
 
