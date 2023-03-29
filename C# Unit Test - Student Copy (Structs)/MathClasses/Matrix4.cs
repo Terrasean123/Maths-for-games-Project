@@ -14,7 +14,7 @@ namespace MathClasses
         public float m20, m21, m22, m23;
         public float m30, m31, m32, m33;
 
-        public Matrix4(float m00, float m01, float m02, float m03, float m10, float m11, float m12, float m13 , float m20, float m21, float m22, float m23 , float m30 , float m31,  float m32, float m33)
+        public Matrix4(float m00, float m01, float m02, float m03, float m10, float m11, float m12, float m13, float m20, float m21, float m22, float m23, float m30, float m31, float m32, float m33)
         {
             this.m00 = m00;
             this.m01 = m01;
@@ -33,14 +33,52 @@ namespace MathClasses
             this.m32 = m32;
             this.m33 = m33;
         }
-        public static Matrix4 operator *(Matrix4 l, Matrix4 r)
+        public static Matrix4 operator *(Matrix4 M1, Matrix4 M2)
         {
+            return new Matrix4(
+               //M1.m00 * M2.m00 + M1.m10 * M2.m01 + M1.m20 * M2.m02,
+               //M1.m01 * M2.m00 + M1.m11 * M2.m01 + M1.m21 * M2.m02,
+               //M1.m02 * M2.m00 + M1.m12 * M2.m01 + M1.m22 * M2.m02,
+               //M1.m03 * M2.m00 + M1.m13 * M2.m01 + M1.m23 * M2.m02,
 
-            return new Matrix4();
+               // M1.m00 * M2.m10 + M1.m10 * M2.m11 + M1.m20 * M2.m12,
+               // M1.m01 * M2.m10 + M1.m11 * M2.m11 + M1.m21 * M2.m12,
+               // M1.m02 * M2.m10 + M1.m12 * M2.m11 + M1.m22 * M2.m12,
+               // M1.m03 * M2.m10 + M1.m13 * M2.m11 + M1.m23 * M2.m12,
+
+               // M1.m00 * M2.m20 + M1.m10 * M2.m21 + M1.m20 * M2.m22,
+               // M1.m01 * M2.m20 + M1.m11 * M2.m21 + M1.m21 * M2.m22,
+               // M1.m02 * M2.m20 + M1.m12 * M2.m21 + M1.m22 * M2.m22,
+               // M1.m03 * M2.m20 + M1.m13 * M2.m21 + M1.m23 * M2.m22,
+
+               // M1.m00 * M2.m30 + M1.m10 * M2.m31 + M1.m20 * M2.m32,
+               // M1.m01 * M2.m30 + M1.m11 * M2.m31 + M1.m21 * M2.m32,
+               // M1.m02 * M2.m30 + M1.m12 * M2.m31 + M1.m22 * M2.m32,
+               // M1.m03 * M2.m30 + M1.m13 * M2.m31 + M1.m23 * M2.m32
+
+               new Vector4(M1.m00, M1.m10, M1.m20, M1.m30).Dot(new Vector4(M2.m00, M2.m01, M2.m02, M1.m03)),
+               new Vector4(M1.m10, M1.m20 M1.m02, M1.m03).Dot(new Vector4(M2.m01, M2.m11, M2.m21, M1.m31))
+
+
+                 new Vector4(M1.m01, M1.m11, M1.m21, M1.m31).Dot(new Vector4(M2.m10, M2.m11, M2.m12, M1.m13)),
+
+
+                   new Vector4(M1.m02, M1.m12, M1.m22, M1.m32).Dot(new Vector4(M2.m20, M2.m21, M2.m22, M1.m23)),
+
+
+                     new Vector4(M1.m03, M1.m13, M1.m23, M1.m33).Dot(new Vector4(M2.m30, M2.m31, M2.m32, M1.m33)),
+
+
+
+
+
+
+
+            );
 
         }
 
-        public static Vector4 operator *( Matrix4 l , Vector4 r) 
+        public static Vector4 operator *(Matrix4 l, Vector4 r)
         {
 
             return new Vector4();

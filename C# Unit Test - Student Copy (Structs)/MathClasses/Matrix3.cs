@@ -76,7 +76,7 @@ namespace MathClasses
         public void SetRotateX(double radians)
         {
             
-            Set()
+            
 
         }
         public void SetRotateY(float rotatation)
