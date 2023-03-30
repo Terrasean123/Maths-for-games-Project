@@ -48,17 +48,18 @@ namespace MathClasses
         public static Matrix3 operator *(Matrix3 M1, Matrix3 M2)
         {
             return new Matrix3(
-                M1.m00 * M2.m00 + M1.m10 * M2.m01 + M1.m20 * M2.m02,
-                M1.m01 * M2.m00 + M1.m11 * M2.m01 + M1.m21 * M2.m02,
-                M1.m02 * M2.m00 + M1.m12 * M2.m01 + M1.m22 * M2.m02,
+                 M1.m00 * M2.m00 + M1.m10 * M2.m01 + M1.m20 * M2.m02,
+                 M1.m01 * M2.m00 + M1.m11 * M2.m01 + M1.m21 * M2.m02,
+                 M1.m02 * M2.m00 + M1.m12 * M2.m01 + M1.m22 * M2.m02,
 
-                 M1.m00 * M2.m10 + M1.m10 * M2.m11 + M1.m20 * M2.m12,
-                 M1.m01 * M2.m10 + M1.m11 * M2.m11 + M1.m21 * M2.m12,
-                 M1.m02 * M2.m10 + M1.m12 * M2.m11 + M1.m22 * M2.m12,
+                  M1.m00 * M2.m10 + M1.m10 * M2.m11 + M1.m20 * M2.m12,
+                  M1.m01 * M2.m10 + M1.m11 * M2.m11 + M1.m21 * M2.m12,
+                  M1.m02 * M2.m10 + M1.m12 * M2.m11 + M1.m22 * M2.m12,
 
-                 M1.m00 * M2.m20 + M1.m10 * M2.m21 + M1.m20 * M2.m22,
-                 M1.m01 * M2.m20 + M1.m11 * M2.m21 + M1.m21 * M2.m22,
-                 M1.m02 * M2.m20 + M1.m12 * M2.m21 + M1.m22 * M2.m22
+                  M1.m00 * M2.m20 + M1.m10 * M2.m21 + M1.m20 * M2.m22,
+                  M1.m01 * M2.m20 + M1.m11 * M2.m21 + M1.m21 * M2.m22,
+                  M1.m02 * M2.m20 + M1.m12 * M2.m21 + M1.m22 * M2.m22
+
                 );
 
         }
@@ -75,22 +76,44 @@ namespace MathClasses
 
         public void SetRotateX(double radians)
         {
-            
-            
-
+            this.m00 = 1;
+            this.m01 = 0;
+            this.m02 = 0;
+            this.m10 = 0;
+            this.m11 = (float)Math.Cos(radians);
+            this.m12 = (float)Math.Sin(radians);
+            this.m20 = 0;
+            this.m21 = (float)-Math.Sin(radians);
+            this.m22 = (float)Math.Cos(radians);
         }
-        public void SetRotateY(float rotatation)
+        public void SetRotateY(double radians)
         {
-
+            this.m00 = (float)Math.Cos(radians);
+            this.m01 = 0;
+            this.m02 = (float)-Math.Sin(radians);
+            this.m10 = 0;
+            this.m11 = 1;
+            this.m12 = 0;
+            this.m20 = (float)Math.Sin(radians);
+            this.m21 = 0;
+            this.m22 = (float)Math.Cos(radians);
         }
-        public void SetRotateZ(float rotatation)
+        public void SetRotateZ(double radians)
         {
-
+            this.m00 = (float)Math.Cos(radians);
+            this.m01 =(float)Math.Sin(radians);
+            this.m02 = 0;
+            this.m10 = (float)-Math.Sin(radians);
+            this.m11 = (float)Math.Cos(radians);
+            this.m12 = 0;
+            this.m20 = 0;
+            this.m21 = 0;
+            this.m22 = 1;
         }
         public void SetTranslation(float x, float y)
         {
 
-
+            this.m20 = x; this.m21 = y;
         }
     }
 }

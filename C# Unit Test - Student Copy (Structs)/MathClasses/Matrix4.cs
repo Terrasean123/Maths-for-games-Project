@@ -36,52 +36,57 @@ namespace MathClasses
         public static Matrix4 operator *(Matrix4 M1, Matrix4 M2)
         {
             return new Matrix4(
-               //M1.m00 * M2.m00 + M1.m10 * M2.m01 + M1.m20 * M2.m02,
-               //M1.m01 * M2.m00 + M1.m11 * M2.m01 + M1.m21 * M2.m02,
-               //M1.m02 * M2.m00 + M1.m12 * M2.m01 + M1.m22 * M2.m02,
-               //M1.m03 * M2.m00 + M1.m13 * M2.m01 + M1.m23 * M2.m02,
+               M1.m00 * M2.m00 + M1.m10 * M2.m01 + M1.m20 * M2.m02 + M1.m30 * M2.m03,
+               M1.m01 * M2.m00 + M1.m11 * M2.m01 + M1.m21 * M2.m02 + M1.m31 * M2.m03,
+               M1.m02 * M2.m00 + M1.m12 * M2.m01 + M1.m22 * M2.m02 + M1.m32 * M2.m03,
+               M1.m03 * M2.m00 + M1.m13 * M2.m01 + M1.m23 * M2.m02 + M1.m33 * M2.m03,
 
-               // M1.m00 * M2.m10 + M1.m10 * M2.m11 + M1.m20 * M2.m12,
-               // M1.m01 * M2.m10 + M1.m11 * M2.m11 + M1.m21 * M2.m12,
-               // M1.m02 * M2.m10 + M1.m12 * M2.m11 + M1.m22 * M2.m12,
-               // M1.m03 * M2.m10 + M1.m13 * M2.m11 + M1.m23 * M2.m12,
+               M1.m00 * M2.m10 + M1.m10 * M2.m11 + M1.m20 * M2.m12 + M1.m30 * M2.m13,
+               M1.m01 * M2.m10 + M1.m11 * M2.m11 + M1.m21 * M2.m12 + M1.m31 * M2.m13,
+               M1.m02 * M2.m10 + M1.m12 * M2.m11 + M1.m22 * M2.m12 + M1.m32 * M2.m13,
+               M1.m03 * M2.m10 + M1.m13 * M2.m11 + M1.m23 * M2.m12 + M1.m33 * M2.m13,
 
-               // M1.m00 * M2.m20 + M1.m10 * M2.m21 + M1.m20 * M2.m22,
-               // M1.m01 * M2.m20 + M1.m11 * M2.m21 + M1.m21 * M2.m22,
-               // M1.m02 * M2.m20 + M1.m12 * M2.m21 + M1.m22 * M2.m22,
-               // M1.m03 * M2.m20 + M1.m13 * M2.m21 + M1.m23 * M2.m22,
+               M1.m00 * M2.m20 + M1.m10 * M2.m21 + M1.m20 * M2.m22 + M1.m30 * M2.m23,
+               M1.m01 * M2.m20 + M1.m11 * M2.m21 + M1.m21 * M2.m22 + M1.m31 * M2.m23,
+               M1.m02 * M2.m20 + M1.m12 * M2.m21 + M1.m22 * M2.m22 + M1.m32 * M2.m23,
+               M1.m03 * M2.m20 + M1.m13 * M2.m21 + M1.m23 * M2.m22 + M1.m33 * M2.m23,
 
-               // M1.m00 * M2.m30 + M1.m10 * M2.m31 + M1.m20 * M2.m32,
-               // M1.m01 * M2.m30 + M1.m11 * M2.m31 + M1.m21 * M2.m32,
-               // M1.m02 * M2.m30 + M1.m12 * M2.m31 + M1.m22 * M2.m32,
-               // M1.m03 * M2.m30 + M1.m13 * M2.m31 + M1.m23 * M2.m32
+               M1.m00 * M2.m30 + M1.m10 * M2.m31 + M1.m20 * M2.m32 + M1.m30 * M2.m33,
+               M1.m01 * M2.m30 + M1.m11 * M2.m31 + M1.m21 * M2.m32 + M1.m31 * M2.m33,
+               M1.m02 * M2.m30 + M1.m12 * M2.m31 + M1.m22 * M2.m32 + M1.m32 * M2.m33,
+               M1.m03 * M2.m30 + M1.m13 * M2.m31 + M1.m23 * M2.m32 + M1.m33 * M2.m33
 
-               new Vector4(M1.m00, M1.m10, M1.m20, M1.m30).Dot(new Vector4(M2.m00, M2.m01, M2.m02, M1.m03)),
-               new Vector4(M1.m10, M1.m20 M1.m02, M1.m03).Dot(new Vector4(M2.m01, M2.m11, M2.m21, M1.m31))
+              //new Vector4(M1.m00, M1.m10, M1.m20, M1.m30).Dot(new Vector4(M2.m00, M2.m01, M2.m02, M1.m03)),// COLUMNS/ROWS
+              //new Vector4(M1.m00, M1.m10, M1.m20, M1.m30).Dot(new Vector4(M2.m10, M2.m11, M2.m12, M1.m13)),/// rememeber that you use outside outside to multiply
+              //new Vector4(M1.m00, M1.m10, M1.m20, M1.m30).Dot(new Vector4(M2.m20, M2.m21, M2.m22, M1.m23)),
+              //new Vector4(M1.m00, M1.m10, M1.m20, M1.m30).Dot(new Vector4(M2.m30, M2.m31, M2.m32, M1.m33)),
 
+              //new Vector4(M1.m01, M1.m11, M1.m21, M1.m31).Dot(new Vector4(M2.m00, M2.m01, M2.m02, M1.m03)),
+              //new Vector4(M1.m01, M1.m11, M1.m21, M1.m31).Dot(new Vector4(M2.m10, M2.m11, M2.m12, M1.m13)),
+              //new Vector4(M1.m01, M1.m11, M1.m21, M1.m31).Dot(new Vector4(M2.m20, M2.m21, M2.m22, M1.m23)),
+              //new Vector4(M1.m01, M1.m11, M1.m21, M1.m31).Dot(new Vector4(M2.m30, M2.m31, M2.m32, M1.m33)),
 
-                 new Vector4(M1.m01, M1.m11, M1.m21, M1.m31).Dot(new Vector4(M2.m10, M2.m11, M2.m12, M1.m13)),
+              //new Vector4(M1.m02, M1.m12, M1.m22, M1.m32).Dot(new Vector4(M2.m00, M2.m01, M2.m02, M1.m03)),
+              //new Vector4(M1.m02, M1.m12, M1.m22, M1.m32).Dot(new Vector4(M2.m10, M2.m11, M2.m12, M1.m13)),
+              //new Vector4(M1.m02, M1.m12, M1.m22, M1.m32).Dot(new Vector4(M2.m20, M2.m21, M2.m22, M1.m23)),
+              //new Vector4(M1.m02, M1.m12, M1.m22, M1.m32).Dot(new Vector4(M2.m30, M2.m31, M2.m32, M1.m33)),
 
-
-                   new Vector4(M1.m02, M1.m12, M1.m22, M1.m32).Dot(new Vector4(M2.m20, M2.m21, M2.m22, M1.m23)),
-
-
-                     new Vector4(M1.m03, M1.m13, M1.m23, M1.m33).Dot(new Vector4(M2.m30, M2.m31, M2.m32, M1.m33)),
-
-
-
-
-
-
-
-            );
+              //new Vector4(M1.m03, M1.m13, M1.m23, M1.m33).Dot(new Vector4(M2.m00, M2.m01, M2.m02, M1.m03)),
+              //new Vector4(M1.m03, M1.m13, M1.m23, M1.m33).Dot(new Vector4(M2.m10, M2.m11, M2.m12, M1.m13)),
+              //new Vector4(M1.m03, M1.m13, M1.m23, M1.m33).Dot(new Vector4(M2.m20, M2.m21, M2.m22, M1.m23)),
+              //new Vector4(M1.m03, M1.m13, M1.m23, M1.m33).Dot(new Vector4(M2.m30, M2.m31, M2.m32, M1.m33))
+              );
 
         }
 
-        public static Vector4 operator *(Matrix4 l, Vector4 r)
+        public static Vector4 operator *(Matrix4 M, Vector4 V)
         {
 
-            return new Vector4();
+            return new Vector4(
+                V.x * M.m00 + V.y * M.m10 + V.z * M.m20 + V.w * M.m30,
+                V.x * M.m01 + V.y * M.m11 + V.z * M.m21 + V.w * M.m31,
+                V.x * M.m02 + V.y * M.m12 + V.z * M.m22 + V.w * M.m32,
+                V.x * M.m03 + V.y * M.m13 + V.z * M.m23 + V.w * M.m33);
         }
         public void SetRotateX(float rotatation)
         {
