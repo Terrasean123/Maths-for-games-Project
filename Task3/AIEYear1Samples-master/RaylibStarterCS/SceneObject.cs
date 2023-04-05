@@ -151,13 +151,13 @@ namespace RaylibStarterCS
 
         public void Translate(float x, float y)
         {
-            localTransform.SetTranslation(x, y);
+            localTransform.Translate(x, y);
             UpdateTransform();
         }
 
         public void Rotate(float radians)
         {
-            localTransform.SetRotateZ(radians);
+            localTransform.RotateZ(radians);
             UpdateTransform();
         }
 

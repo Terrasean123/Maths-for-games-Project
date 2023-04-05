@@ -101,7 +101,7 @@ namespace MathClasses
         public void SetRotateZ(double radians)
         {
             this.m00 = (float)Math.Cos(radians);
-            this.m01 =(float)Math.Sin(radians);
+            this.m01 = (float)Math.Sin(radians);
             this.m02 = 0;
             this.m10 = (float)-Math.Sin(radians);
             this.m11 = (float)Math.Cos(radians);
@@ -110,11 +110,40 @@ namespace MathClasses
             this.m21 = 0;
             this.m22 = 1;
         }
+
+        public void RotateX(double radians)
+        {
+            Matrix3 m = new Matrix3();
+            m.SetRotateX(radians);
+            this = this * m;
+        }
+
+        public void RotateY(double radians)
+        {
+            Matrix3 m = new Matrix3();
+            m.SetRotateY(radians);
+            this = this * m;
+        }
+
+        public void RotateZ(double radians)
+        {
+            Matrix3 m = new Matrix3();
+            m.SetRotateZ(radians);
+            this = this * m;
+        }
+
         public void SetTranslation(float x, float y)
         {
 
             this.m20 = x; this.m21 = y;
         }
+
+        public void Translate(float x, float y)
+        {
+            this.m20 += x; this.m21 += y;
+        }
+
+
         public void SetScaled(float x, float y, float z)
         {
             m00 = x; m01 = 0; m02 = 0;
@@ -127,11 +156,20 @@ namespace MathClasses
             m10 = 0; m11 = v.y; m12 = 0;
             m20 = 0; m21 = 0; m22 = v.z;
         }
-        //public void Scale(float x, float y, float z)
-        //{
-        //    Matrix3 m = new Matrix3();
-        //    m.SetScaled(x, y, z);
-        //    Set(this * m);
-        //}
+        public void Scale(float x, float y, float z)
+        {
+            Matrix3 m = new Matrix3();
+            m.SetScaled(x, y, z);
+            this = this * m;
+        }
+
+
+
+        public void Scale( MathClasses.Vector3 v)
+        {
+            Matrix3 m = new Matrix3();
+            m.SetScaled(v.x, v.y, v.z);
+            this = this * m;
+        }
     }
 }
