@@ -4,9 +4,9 @@ using Raylib_cs;
 
 namespace RaylibStarterCS
 {
-	class Program
-	{
-		static void Main(string[] args)
+    class Program
+    {
+        static void Main(string[] args)
         {
             Game game = new Game();
 
@@ -16,13 +16,15 @@ namespace RaylibStarterCS
 
             while (!Raylib.WindowShouldClose())
             {
+
                 game.Update();
                 game.Draw();
+                game.Debug();
             }
-            
+
             game.Shutdown();
-            
+
             Raylib.CloseWindow();
         }
-	}
+    }
 }

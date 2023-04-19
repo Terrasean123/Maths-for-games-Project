@@ -27,7 +27,7 @@ namespace RaylibStarterCS
         SpriteObject tankSprite = new SpriteObject();
         SpriteObject turretSprite = new SpriteObject();
 
-         
+
         Camera2D camera;
 
         public Game()
@@ -52,6 +52,11 @@ namespace RaylibStarterCS
             tankSprite.SetRotate(-90 * (float)(Math.PI / 180.0f));
 
             tankSprite.SetPosition(-tankSprite.Width / 2.0f, tankSprite.Height / 2.0f);
+            bulletSprite.Load("L:/Maths for games project/Maths-for-games-Project/Task3/AIEYear1Samples-master/Sprites/bulletDark1_outline.png");
+            bulletSprite.SetRotate(-90 * (float)(Math.PI / 180.0f));
+            bulletSprite.SetPosition(-bulletSprite.Height, bulletSprite.Width / 2);
+            bulletObject.AddChild(bulletSprite);
+
 
             turretSprite.Load("L:/Maths for games project/Maths-for-games-Project/Task3/AIEYear1Samples-master/Sprites/Tank turret.png");
             turretSprite.SetRotate(-90 * (float)(Math.PI / 180.0f));
@@ -78,6 +83,14 @@ namespace RaylibStarterCS
             //camera.zoom = 1.0f;
         }
 
+        public void Debug()
+        {
+            MathClasses.Vector3 facing = new MathClasses.Vector3(tankObject.LocalTransform.m20,
+                   tankObject.LocalTransform.m21, 1);
+            Console.WriteLine("BULLET SPAWN POINT:" + facing.x + " , " + facing.y);
+
+        }
+
         public void Shutdown()
         {
 
@@ -100,17 +113,22 @@ namespace RaylibStarterCS
             //m_timer += deltaTime;
 
             // insert game logic here
-            
+
             if (IsKeyDown(KeyboardKey.KEY_SPACE))
             {
                 //SceneObject bulletObject = new SceneObject();
                 //SpriteObject bulletSprite = new SpriteObject();
-                bulletSprite.Load("L:/Maths for games project/Maths-for-games-Project/Task3/AIEYear1Samples-master/Sprites/bulletDark1_outline.png");
-                bulletObject.AddChild(bulletSprite);
                 //bulletObject.Draw();
-                MathClasses.Vector3 facing = new MathClasses.Vector3(tankSprite.LocalTransform.m00,
-                   tankObject.LocalTransform.m01, 1); 
-                bulletObject.SetPosition(facing.x,facing.y);
+                MathClasses.Vector3 Location =
+                    turretSprite.GlobalTransform *
+                    new MathClasses.Vector3(turretSprite.Width/2, 0, 1);
+
+                float rotation = (float)Math.Atan2(turretObject.GlobalTransform.m01, turretObject.GlobalTransform.m00);
+                bulletObject.SetRotate(rotation);
+                bulletObject.SetPosition(Location.x, Location.y);
+               
+
+
             }
 
             if (IsKeyDown(KeyboardKey.KEY_LEFT))
@@ -124,12 +142,14 @@ namespace RaylibStarterCS
             {
 
                 turretObject.Rotate(deltaTime);
+                // bulletObject.Rotate(deltaTime);
             }
 
             if (IsKeyDown(KeyboardKey.KEY_A))
             {
 
                 tankObject.Rotate(-deltaTime);
+                // bulletObject.Rotate(-deltaTime);
 
             }
 
