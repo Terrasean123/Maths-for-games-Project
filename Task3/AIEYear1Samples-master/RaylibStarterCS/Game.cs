@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq.Expressions;
 using System.Numerics;
 using Raylib_cs;
 using static Raylib_cs.Raylib;
@@ -17,16 +19,19 @@ namespace RaylibStarterCS
         private int frames;
         private float m_timer;
         private float deltaTime = 0.005f;
+        int previousCount = 0;
+        int bulletIterartor = 0;
+        List<SceneObject> bulletList = new List<SceneObject>();
 
         SceneObject tankObject = new SceneObject();
         SceneObject turretObject = new SceneObject();
 
-        SceneObject bulletObject = new SceneObject();
-        SpriteObject bulletSprite = new SpriteObject();
 
+        Bullets[] bulletMagizine = new Bullets[10];
         SpriteObject tankSprite = new SpriteObject();
         SpriteObject turretSprite = new SpriteObject();
-
+        MathClasses.Vector3 turretFacing;
+        MathClasses.Vector3 turretFacingOnLastMovement;
 
         Camera2D camera;
 
@@ -52,19 +57,25 @@ namespace RaylibStarterCS
             tankSprite.SetRotate(-90 * (float)(Math.PI / 180.0f));
 
             tankSprite.SetPosition(-tankSprite.Width / 2.0f, tankSprite.Height / 2.0f);
-            bulletSprite.Load("L:/Maths for games project/Maths-for-games-Project/Task3/AIEYear1Samples-master/Sprites/bulletDark1_outline.png");
-            bulletSprite.SetRotate(-90 * (float)(Math.PI / 180.0f));
-            bulletSprite.SetPosition(-bulletSprite.Height, bulletSprite.Width / 2);
-            bulletObject.AddChild(bulletSprite);
+
+
+
+
+            for (int i = 0; i < bulletMagizine.Length; i++)
+            {
+                bulletMagizine[i] = new Bullets();
+            }
 
 
             turretSprite.Load("L:/Maths for games project/Maths-for-games-Project/Task3/AIEYear1Samples-master/Sprites/Tank turret.png");
             turretSprite.SetRotate(-90 * (float)(Math.PI / 180.0f));
             turretSprite.SetPosition(-60, turretSprite.Width / 2.0f);
             turretObject.Translate(-15, 0);
+            turretFacing = new MathClasses.Vector3(0, 0, 0);
 
             // set up the scene object hierarchy - parent the turret to the base,
             // then the base to the tank sceneObject
+
             turretObject.AddChild(turretSprite);
             tankObject.AddChild(tankSprite);
             tankObject.AddChild(turretObject);
@@ -85,9 +96,47 @@ namespace RaylibStarterCS
 
         public void Debug()
         {
-            MathClasses.Vector3 facing = new MathClasses.Vector3(tankObject.LocalTransform.m20,
-                   tankObject.LocalTransform.m21, 1);
-            Console.WriteLine("BULLET SPAWN POINT:" + facing.x + " , " + facing.y);
+
+            if (previousCount != bulletList.Count)
+            {
+                previousCount = bulletList.Count;
+                Console.WriteLine("Current number of Bullets:" + bulletList.Count);
+            }
+        }
+
+        public bool BulletsUsable()
+        {
+            int usedBullets = 0;
+            for (int i = 0; i < bulletMagizine.Length; i++)
+            {
+                if (bulletMagizine[i].used == true)
+                {
+                    usedBullets++;
+                }
+            }
+            if (usedBullets >= bulletMagizine.Length)
+            {
+               
+                Console.WriteLine("OUT OF Bullets reloading:" + usedBullets);
+                ResetAndReload();
+                return false;
+            }
+            else
+            {
+                return true;
+
+            }
+        }
+
+
+        public void ResetAndReload()
+        {
+            for (int i = 0; i < bulletMagizine.Length; i++)
+            {
+                bulletMagizine[i].used = false;
+
+            }
+
 
         }
 
@@ -99,6 +148,7 @@ namespace RaylibStarterCS
 
         public void Update()
         {
+            float turretRotation = (float)Math.Atan2(turretObject.GlobalTransform.m01, turretObject.GlobalTransform.m00);
             lastTime = currentTime;
             currentTime = stopwatch.ElapsedMilliseconds;
             deltaTime = (currentTime - lastTime) / 1000.0f;
@@ -110,52 +160,51 @@ namespace RaylibStarterCS
                 timer -= 1;
             }
             frames++;
-            //m_timer += deltaTime;
 
-            // insert game logic here
-
-            if (IsKeyDown(KeyboardKey.KEY_SPACE))
+            if (IsKeyReleased(KeyboardKey.KEY_SPACE))
             {
-                //SceneObject bulletObject = new SceneObject();
-                //SpriteObject bulletSprite = new SpriteObject();
-                //bulletObject.Draw();
-                MathClasses.Vector3 Location =
-                    turretSprite.GlobalTransform *
-                    new MathClasses.Vector3(turretSprite.Width/2, 0, 1);
+                if (BulletsUsable() == true)
+                {
+                    MathClasses.Vector3 Location =
+                      turretSprite.GlobalTransform *
+                      new MathClasses.Vector3(turretSprite.Width / 2, 10, 1);
 
-                float rotation = (float)Math.Atan2(turretObject.GlobalTransform.m01, turretObject.GlobalTransform.m00);
-                bulletObject.SetRotate(rotation);
-                bulletObject.SetPosition(Location.x, Location.y);
-               
+                    turretFacing = new MathClasses.Vector3(turretObject.GlobalTransform.m00,
+                    turretObject.GlobalTransform.m01, 1) * deltaTime * -50;
 
+                    bulletMagizine[bulletIterartor].bulletDirection = turretFacing;
+                    bulletMagizine[bulletIterartor].SetRotate(turretRotation);
+                    bulletMagizine[bulletIterartor].SetPosition(Location.x, Location.y);
+                    bulletMagizine[bulletIterartor].used = true;
+
+                    bulletIterartor++;
+                }
+                else
+                {
+                    
+                    bulletIterartor = 0;
+                    Console.WriteLine("Resetting iterator:" + bulletIterartor);
+                }
 
             }
 
             if (IsKeyDown(KeyboardKey.KEY_LEFT))
             {
-
                 turretObject.Rotate(-deltaTime);
-
             }
 
             if (IsKeyDown(KeyboardKey.KEY_RIGHT))
             {
-
                 turretObject.Rotate(deltaTime);
-                // bulletObject.Rotate(deltaTime);
             }
 
             if (IsKeyDown(KeyboardKey.KEY_A))
             {
-
                 tankObject.Rotate(-deltaTime);
-                // bulletObject.Rotate(-deltaTime);
-
             }
 
             if (IsKeyDown(KeyboardKey.KEY_D))
             {
-
                 tankObject.Rotate(deltaTime);
             }
 
@@ -164,8 +213,6 @@ namespace RaylibStarterCS
                 MathClasses.Vector3 facing = new MathClasses.Vector3(tankObject.LocalTransform.m00,
                     tankObject.LocalTransform.m01, 1) * deltaTime * -100;
                 tankObject.Translate(facing.x, facing.y);
-
-
             }
 
             if (IsKeyDown(KeyboardKey.KEY_S))
@@ -173,11 +220,19 @@ namespace RaylibStarterCS
                 MathClasses.Vector3 facing = new MathClasses.Vector3(tankObject.LocalTransform.m00,
                     tankObject.LocalTransform.m01, 1) * deltaTime * 100;
                 tankObject.Translate(facing.x, facing.y);
-
-
             }
+
+            foreach (Bullets bullet in bulletMagizine)
+            {
+                bullet.Translate(bullet.bulletDirection.x, bullet.bulletDirection.y);
+            }
+
             tankObject.Update(deltaTime);
 
+            foreach (SceneObject bullet in bulletMagizine)
+            {
+                bullet.Update(deltaTime);
+            }
         }
 
         public void Draw()
@@ -186,7 +241,10 @@ namespace RaylibStarterCS
 
             ClearBackground(Color.WHITE);
             DrawText(fps.ToString(), 10, 10, 14, Color.RED);
-            bulletObject.Draw();
+            foreach (SceneObject bullet in bulletMagizine)
+            {
+                bullet.Draw();
+            }
             tankObject.Draw();
             EndDrawing();
         }
