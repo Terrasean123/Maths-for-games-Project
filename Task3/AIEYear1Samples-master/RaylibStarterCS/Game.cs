@@ -52,7 +52,8 @@ namespace RaylibStarterCS
                 Console.WriteLine("Stopwatch high-resolution frequency: {0} ticks per second", Stopwatch.Frequency);
             }
 
-            tankSprite.Load("L:/Maths for games project/Maths-for-games-Project/Task3/AIEYear1Samples-master/Sprites/tankBody_blue_outline.png");
+            //tankSprite.Load("L:/Maths for games project/Maths-for-games-Project/Task3/AIEYear1Samples-master/Sprites/tankBody_blue_outline.png");
+            tankSprite.Load("../../../../Sprites/tankBody_blue_outline.png");
 
             tankSprite.SetRotate(-90 * (float)(Math.PI / 180.0f));
 
@@ -67,7 +68,7 @@ namespace RaylibStarterCS
             }
 
 
-            turretSprite.Load("L:/Maths for games project/Maths-for-games-Project/Task3/AIEYear1Samples-master/Sprites/Tank turret.png");
+            turretSprite.Load("../../../../Sprites/Tank turret.png");
             turretSprite.SetRotate(-90 * (float)(Math.PI / 180.0f));
             turretSprite.SetPosition(-60, turretSprite.Width / 2.0f);
             turretObject.Translate(-15, 0);
@@ -102,6 +103,21 @@ namespace RaylibStarterCS
                 previousCount = bulletList.Count;
                 Console.WriteLine("Current number of Bullets:" + bulletList.Count);
             }
+
+        }
+
+        public void DrawBulletHitBox()
+        {
+            //Console.WriteLine("Drawing hitboxes...");
+            foreach (Bullets bullet in bulletMagizine)
+            {
+                Vector2 Center = new Vector2(bullet.CollsionBox.Center().x, bullet.CollsionBox.Center().y);
+                Vector2 Extents = new Vector2(bullet.CollsionBox.Extents().x, bullet.CollsionBox.Extents().y);
+
+                DrawLineEx(Center, Extents, 20, Color.RED);
+                Console.WriteLine("Center:" + Center);
+                Console.WriteLine("Extents: " + Extents);
+            }
         }
 
         public bool BulletsUsable()
@@ -116,7 +132,7 @@ namespace RaylibStarterCS
             }
             if (usedBullets >= bulletMagizine.Length)
             {
-               
+
                 Console.WriteLine("OUT OF Bullets reloading:" + usedBullets);
                 ResetAndReload();
                 return false;
@@ -181,7 +197,7 @@ namespace RaylibStarterCS
                 }
                 else
                 {
-                    
+
                     bulletIterartor = 0;
                     Console.WriteLine("Resetting iterator:" + bulletIterartor);
                 }
@@ -241,6 +257,15 @@ namespace RaylibStarterCS
 
             ClearBackground(Color.WHITE);
             DrawText(fps.ToString(), 10, 10, 14, Color.RED);
+            //foreach (Bullets bullet in bulletMagizine)
+            //{
+            //    Vector2 Center = new Vector2(bullet.CollsionBox.Center().x, bullet.CollsionBox.Center().y);
+            //    Vector2 Extents = new Vector2(bullet.CollsionBox.Extents().x, bullet.CollsionBox.Extents().y);
+
+            //    DrawLineEx(Center, Extents, 20, Color.RED);
+
+            //}
+            DrawBulletHitBox();
             foreach (SceneObject bullet in bulletMagizine)
             {
                 bullet.Draw();
