@@ -114,7 +114,7 @@ namespace RaylibStarterCS
                 Vector2 Center = new Vector2(bullet.CollsionBox.Center().x, bullet.CollsionBox.Center().y);
                 Vector2 Extents = new Vector2(bullet.CollsionBox.Extents().x, bullet.CollsionBox.Extents().y);
 
-                DrawLineEx(Center, Extents, 20, Color.RED);
+                DrawLineEx(Center, Extents,1000, Color.RED);
                 Console.WriteLine("Center:" + Center);
                 Console.WriteLine("Extents: " + Extents);
             }
