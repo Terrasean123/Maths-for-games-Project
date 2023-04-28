@@ -16,7 +16,7 @@ namespace RaylibStarterCS
 
             while (!Raylib.WindowShouldClose())
             {
-
+                game.DestroyBullet();
                 game.Update();
                 game.Draw();
                 game.Debug();

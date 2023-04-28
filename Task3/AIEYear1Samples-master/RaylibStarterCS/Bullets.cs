@@ -6,7 +6,7 @@ namespace RaylibStarterCS
 {
     internal class Bullets : SceneObject
     {
-        SpriteObject bulletSprite = new SpriteObject();
+        public SpriteObject bulletSprite = new SpriteObject();
         public MathClasses.Vector3 bulletDirection;
         public AABB CollsionBox;
         public bool used = false;
@@ -20,6 +20,20 @@ namespace RaylibStarterCS
             AddChild(bulletSprite);
             CollsionBox = new AABB(new MathClasses.Vector3(bulletSprite.LocalTransform.m00, bulletSprite.LocalTransform.m01, 1), bulletSprite.LocalTransform * new MathClasses.Vector3(bulletSprite.Width, bulletSprite.Height, 1));
         }
+
+        public void Die()
+        {
+            alive = false;
+            RemoveChild(bulletSprite);
+        }
+
+        public void Live()
+        {
+            alive = true;
+            AddChild(bulletSprite);
+        }
+
+
 
     }
 }

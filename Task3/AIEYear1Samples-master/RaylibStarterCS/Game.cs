@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Numerics;
 using Raylib_cs;
@@ -114,7 +115,7 @@ namespace RaylibStarterCS
                 Vector2 Center = new Vector2(bullet.CollsionBox.Center().x, bullet.CollsionBox.Center().y);
                 Vector2 Extents = new Vector2(bullet.CollsionBox.Extents().x, bullet.CollsionBox.Extents().y);
 
-                DrawLineEx(Center, Extents,1000, Color.RED);
+                DrawLineEx(Center, Extents, 1000, Color.RED);
                 Console.WriteLine("Center:" + Center);
                 Console.WriteLine("Extents: " + Extents);
             }
@@ -143,7 +144,28 @@ namespace RaylibStarterCS
 
             }
         }
+        public void DestroyBullet()
+        {
+            for (int i = 0; i < bulletMagizine.Count(); i++)
+            {
+                MathClasses.Vector3 bulletLocation = bulletMagizine[i].GlobalTransform *
+                    new MathClasses.Vector3(bulletMagizine[i].bulletSprite.Width, bulletMagizine[i].bulletSprite.Height, 1);
+                Console.WriteLine("x:" + bulletLocation.x);
+                Console.WriteLine("y:" + bulletLocation.y);
 
+                if (bulletMagizine[i].used == true)
+                {
+                    if (bulletLocation.x <= 30 || bulletLocation.x >= 600)
+                    {
+                        bulletMagizine[i].Die();
+                    }
+                    if (bulletLocation.y <= 30 || bulletLocation.y >= 440)
+                    {
+                        bulletMagizine[i].Die();
+                    }
+                }
+            }
+        }
 
         public void ResetAndReload()
         {
@@ -265,7 +287,7 @@ namespace RaylibStarterCS
             //    DrawLineEx(Center, Extents, 20, Color.RED);
 
             //}
-            DrawBulletHitBox();
+            // DrawBulletHitBox();
             foreach (SceneObject bullet in bulletMagizine)
             {
                 bullet.Draw();
